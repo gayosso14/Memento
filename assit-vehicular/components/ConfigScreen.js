@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Switch, TouchableOpacity, Alert } from 'react-native';
-import { Audio } from 'expo-av'; // <-- 1. Importamos Audio de expo-av
+import { Audio } from 'expo-av'; // libreria Audio de expo-av
 import { SectionCard, Row, StatusBadge } from './SharedComponents';
 import { AsientoScreen }                  from './AsientoScreen';
 import { styles }                         from '../styles/styles';
 import { PRESET_MODES, CLIMA_OPTIONS, DISTANCIAS } from '../constants/appConstants';
 
 const PASO_VOLUMEN = 10;
-const VOLUMEN_MINIMO = 20; // <-- 2. Definimos el volumen mínimo en 20%
+const VOLUMEN_MINIMO = 20; // volumen mínimo en 20%
 
 function iconoVolumen(v) {
   if (v <= 30)  return '🔈';
@@ -21,7 +21,7 @@ function colorVolumen(v) {
   return '#F44336';              // Rojo
 }
 
-// 3. Modificamos el componente para que reciba una URL de sonido
+// componente para que reciba una URL de sonido
 function ControlVolumen({ label, valor, onChange, soundUrl }) {
   const [sound, setSound] = useState();
 
@@ -31,7 +31,7 @@ function ControlVolumen({ label, valor, onChange, soundUrl }) {
     try {
       const { sound: newSound } = await Audio.Sound.createAsync(
         { uri: soundUrl },
-        { volume: currentVolume / 100 } // Expo-av usa volumen de 0.0 a 1.0
+        { volume: currentVolume / 100 } //  volumen de 0.0 a 1.0
       );
       setSound(newSound);
       await newSound.playAsync();
@@ -40,19 +40,19 @@ function ControlVolumen({ label, valor, onChange, soundUrl }) {
     }
   }
 
-  // Limpieza de memoria para los sonidos
+  // limpieza de memoria para los sonidos
   useEffect(() => {
     return sound ? () => { sound.unloadAsync(); } : undefined;
   },[sound]);
 
-  // Lógica para ajustar volumen asegurando el MÍNIMO de 20%
+  // Ajustar volumen asegurando el min de 20%
   const ajustar = (delta) => {
     const nuevo = Math.min(100, Math.max(VOLUMEN_MINIMO, valor + delta));
     onChange(nuevo);
     playSoundPreview(nuevo); // Reproducimos preview al cambiar
   };
 
-  // Cuando el usuario presiona un segmento (cuadrito) directamente
+  // Cuando el usuario presiona un segmento cuadrito directamente
   const setDirecto = (v) => {
     const nuevo = Math.max(VOLUMEN_MINIMO, v); // Si presiona 10%, lo fuerza a 20%
     onChange(nuevo);
@@ -164,7 +164,7 @@ export function ConfigScreen({ config, updateConfig, applyPreset, onSave, perfil
         />
       </SectionCard>
 
-      {/* NUEVO: Sensor de proximidad de reversa */}
+      {/* Sensor de proximidad de reversa */}
       <SectionCard title=" Sensor de Proximidad en Reversa">
         <Row
           label="Sensor de estacionamiento"
@@ -183,7 +183,7 @@ export function ConfigScreen({ config, updateConfig, applyPreset, onSave, perfil
           label="Volumen de alerta (Sonar)"
           valor={config.volumenReversa}
           onChange={(v) => updateConfig({ volumenReversa: v })}
-          // Un sonido de "doble beep" muy similar al de los autos al retroceder
+          // Un sonido al retroceder
           soundUrl="https://www.soundjay.com/buttons_c2026/sounds/beep-09.mp3" 
         />
       </SectionCard>
