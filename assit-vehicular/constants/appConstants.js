@@ -7,7 +7,7 @@ export const PRESET_MODES = {
       sensorCarril: true,  volumenSensor: 80,
       frenadoAutomatico: 50,
       alertaPuntoCiego: true, volumenPuntoCiego: 80,
-      sensorReversa: true, volumenReversa: 80, // <-- NUEVO
+      sensorReversa: true, volumenReversa: 80,
       modoClima: 'ninguno', asiento: { altura: 50, inclinacion: 0 },
     },
   },
@@ -19,7 +19,7 @@ export const PRESET_MODES = {
       sensorCarril: true,  volumenSensor: 50,
       frenadoAutomatico: 30,
       alertaPuntoCiego: false, volumenPuntoCiego: 50,
-      sensorReversa: true, volumenReversa: 50, // <-- NUEVO
+      sensorReversa: true, volumenReversa: 50, 
       modoClima: 'lluvia', asiento: { altura: 60, inclinacion: 10 },
     },
   },
@@ -31,7 +31,7 @@ export const PRESET_MODES = {
       sensorCarril: false, volumenSensor: 30,
       frenadoAutomatico: 15,
       alertaPuntoCiego: true, volumenPuntoCiego: 30,
-      sensorReversa: false, volumenReversa: 30, // <-- NUEVO
+      sensorReversa: false, volumenReversa: 30, 
       modoClima: 'nieve', asiento: { altura: 30, inclinacion: -5 },
     },
   },
